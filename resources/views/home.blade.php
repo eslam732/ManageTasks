@@ -23,7 +23,7 @@
         <div class="button-container">
             <a href="http://127.0.0.1:8000/signUpView" class="btn btn-primary btn-lg mb-3">Sign Up</a>
             <br>
-            <a href="http://127.0.0.1:8000/loginView" class="btn btn-secondary btn-lg">Log In</a>
+            <a href="http://127.0.0.1:8000/login" class="btn btn-secondary btn-lg">Log In</a>
         </div>
     </div>
 </body>

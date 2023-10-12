@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->dateTime('due_date');
-            $table->enum('status',['inProgress','finished']);
+            $table->enum('status',['not_started','started','finished'])->default('not_started');
             $table->timestamps();
         });
     }

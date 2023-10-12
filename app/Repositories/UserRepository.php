@@ -3,8 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class UserRepository
 {
@@ -19,34 +18,33 @@ class UserRepository
     {
         $data['password'] = bcrypt($data['password']);
         $user = User::create($data);
-    
+
         $viewData = [
-            'token' => $user->createToken('api-application')->accessToken,
             'name' => $user->name,
             'id' => $user->id,
         ];
 
-        return  $viewData;
-            
+        auth()->login($user);
+        return $viewData;
+
     }
 
     public function login($data)
     {
-       
-        $user=User::where('email',$data['email'])->first();
-        if (!Hash::check(request()->password, $user->password)) {
-             return 'Incorrect email or password';
 
+        $user = User::where('email', $data['email'])->first();
+        return redirect()->route('login')->with('error', 'Invalid credentials');
+
+        if (!auth()->attempt(['email' => $data['email'], 'password' => $data['password']])) {
+            return 'Incorrect email or password';
         }
-    
         $viewData = [
-            'token' => $user->createToken('api-application')->accessToken,
             'name' => $user->name,
             'id' => $user->id,
         ];
+        
+        return $viewData;
 
-        return  $viewData;
-            
     }
 
 }

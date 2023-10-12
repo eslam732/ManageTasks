@@ -2,12 +2,15 @@
 <html>
 <head>
     <title>Sign Up</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 </head>
 <body>
     <div class="container">
         <h1 class="display-4 text-center mb-4">Sign Up</h1>
-        <form method="POST" action="{{ route('signUp') }}" class="needs-validation" novalidate>
+        <form method="POST" action="{{ route('signUp') }}" class="needs-validation">
             @csrf
 
             <div class="mb-3">
