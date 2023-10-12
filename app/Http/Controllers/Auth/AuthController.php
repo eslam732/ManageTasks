@@ -26,7 +26,12 @@ class AuthController extends Controller
     public function login()
     {
         $data=request()->all();
-       $viewData= $this->userService->login($data);
-       return view('tasks', $viewData);
+       $result = $this->userService->login($data);
+
+       if (is_string($result)) {
+        
+        return view('login', ['error' => $result]);
+    }
+       return view('tasks', $result );
     }
 }

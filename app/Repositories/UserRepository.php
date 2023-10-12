@@ -35,7 +35,8 @@ class UserRepository
        
         $user=User::where('email',$data['email'])->first();
         if (!Hash::check(request()->password, $user->password)) {
-           dd('wrong pass');
+             return 'Incorrect email or password';
+
         }
     
         $viewData = [

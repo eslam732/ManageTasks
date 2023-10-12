@@ -25,7 +25,7 @@ Route::get('/signUpView', function () {
 
 Route::post('signUp',[AuthController::class,'register'])->name('signUp');
 
-Route::get('/loginView', function () {
+Route::get('/login', function () {
     return view('login');
 })->name('loginView');
 
