@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Stmt\Echo_;
 
@@ -16,7 +17,7 @@ use PhpParser\Node\Stmt\Echo_;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('main');
 });
 
 Route::get('/signUpView', function () {
@@ -30,3 +31,12 @@ Route::get('/login', function () {
 })->name('loginView');
 
 Route::post('login',[AuthController::class,'login'])->name('login');
+
+Route::middleware(['session.auth'])->get('/addTask', function () {
+    return view('addTask');
+})->name('addTaskView');
+
+
+Route::get('/tasks', [TaskController::class,'index'])->name('tasks');
+
+Route::post('addTask',[TaskController::class,'createTask'])->name('addTask');

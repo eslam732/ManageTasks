@@ -19,7 +19,7 @@ class AuthController extends Controller
     {
         $data=request()->all();
        $viewData= $this->userService->register($data);
-       return view('tasks', $viewData);
+       return redirect()->route('tasks');
     }
 
 
@@ -32,6 +32,7 @@ class AuthController extends Controller
         
         return view('login', ['error' => $result]);
     }
-       return view('tasks', $result );
+    return redirect()->route('tasks');
+
     }
 }
