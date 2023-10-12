@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Stmt\Echo_;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Route::get('/signUpView', function () {
+    return view('signUp');
+})->name('signUpView');
+
+Route::post('signUp',[AuthController::class,'register'])->name('signUp');
+
+Route::get('/loginView', function () {
+    return view('login');
+})->name('loginView');
+
+Route::post('login',[AuthController::class,'login'])->name('login');
