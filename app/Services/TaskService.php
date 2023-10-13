@@ -14,16 +14,26 @@ class TaskService
         $this->taskRepository = $taskRepository;
     }
 
-    public function createTask()
+    public function createTask($request)
     {
-        
-        request()->validate([
-            'title' => 'required|max:50',
-            'description'=> 'required|max:150',
-            'due_date'=> 'required|date|after:now',
-        ]);
 
-        return $this->taskRepository->createTask(request()->all());
+        return $this->taskRepository->createTask($request);
     }
+
+    public function search()
+    {
+      return $this->taskRepository->search();
+    }
+
+    public function deleteTask($taskId)
+    {
+      return $this->taskRepository->deleteTask($taskId);
+    }
+
+    public function update($request,$taskId)
+    {
+      return $this->taskRepository->update($request,$taskId);
+    }
+
 
 }

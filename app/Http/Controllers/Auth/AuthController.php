@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Services\UserService;
-use Illuminate\Http\Request;
+use Exception;
 
 class AuthController extends Controller
 {
@@ -15,24 +17,48 @@ class AuthController extends Controller
         $this->userService = $userService;
     }
 
-    public function register()
+    public function register(RegisterRequest $request)
     {
-        $data=request()->all();
-       $viewData= $this->userService->register($data);
-       return redirect()->route('tasks');
+        try {
+            $this->userService->register($request->all());
+            return redirect()->route('tasks.index');
+        } catch (Exception $e) {
+            return view('signUpView', ['error' => $e->getMessage()]);
+
+        }
+
     }
 
-
-    public function login()
+    public function renderRegisterForm()
     {
-        $data=request()->all();
-       $result = $this->userService->login($data);
 
-       if (is_string($result)) {
-        
-        return view('login', ['error' => $result]);
+            if (auth()->user()) {
+                return redirect()->route('tasks.index');
+
+            }
+            return view('signUp');
+
     }
-    return redirect()->route('tasks');
+
+    public function login(LoginRequest $request)
+    {
+
+        try {
+
+            $this->userService->login($request);
+            return redirect()->route('tasks.index');
+        } catch (Exception $e) {
+            return view('login', ['error' => $e->getMessage()]);
+        }
+
+    }
+    public function renderLoginForm()
+    {
+        if (auth()->user()) {
+            return redirect()->route('tasks.index');
+
+        }
+        return view('login');
 
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Session;
+use Exception;
 
 class UserRepository
 {
@@ -16,34 +16,39 @@ class UserRepository
 
     public function register($data)
     {
-        $data['password'] = bcrypt($data['password']);
-        $user = User::create($data);
+        try { $data['password'] = bcrypt($data['password']);
+            $user = User::create($data);
 
-        $viewData = [
-            'name' => $user->name,
-            'id' => $user->id,
-        ];
+            $viewData = [
+                'name' => $user->name,
+                'id' => $user->id,
+            ];
 
-        auth()->login($user);
-        return $viewData;
+            auth()->login($user);
+            return $viewData;
+        } catch (\Throwable $th) {
+            dd($th);
+        }
 
     }
 
     public function login($data)
     {
 
-        $user = User::where('email', $data['email'])->first();
-        return redirect()->route('login')->with('error', 'Invalid credentials');
+        try {
+            $user = User::where('email', $data['email'])->first();
 
-        if (!auth()->attempt(['email' => $data['email'], 'password' => $data['password']])) {
-            return 'Incorrect email or password';
+            if (!auth()->attempt(['email' => $data['email'], 'password' => $data['password']])) {
+
+                throw new Exception('Incorrect email or password');
+            }
+
+            return $user;
+
+        } catch (Exception $e) {
+            throw $e;
+
         }
-        $viewData = [
-            'name' => $user->name,
-            'id' => $user->id,
-        ];
-        
-        return $viewData;
 
     }
 

@@ -7,13 +7,7 @@
         body {
             background-color: #f8f9fa;
         }
-        /* .container {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        } */
+
     </style>
 </head>
 <body>
@@ -23,7 +17,7 @@
         <div class="button-container">
             <a href="http://127.0.0.1:8000/signUpView" class="btn btn-primary btn-lg mb-3">Sign Up</a>
             <br>
-            <a href="http://127.0.0.1:8000/login" class="btn btn-secondary btn-lg">Log In</a>
+            <a href="http://127.0.0.1:8000/loginForm" class="btn btn-secondary btn-lg">Log In</a>
         </div>
     </div>
 </body>

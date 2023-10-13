@@ -20,6 +20,6 @@ class SessionAuth
             return $next($request);
         }
     
-        return redirect('/login'); // Redirect to the login page if not authenticated
+        return redirect('/loginForm'); // Redirect to the login page if not authenticated
     }
 }

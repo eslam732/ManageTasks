@@ -17,11 +17,7 @@ class UserService
 public function register($data)
 {
    
-        request()->validate([
-            'name' => 'required|string|max:50',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:8',
-        ]);
+       
         
    return $this->userRepository->register($data);
 }
@@ -29,11 +25,6 @@ public function register($data)
 
 public function login($data)
 {
-   
-        request()->validate([
-            'email' => 'required|email|exists:users',
-            'password' => 'required',
-        ]);
         
    return $this->userRepository->login($data);
 }
