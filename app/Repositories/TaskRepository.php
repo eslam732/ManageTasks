@@ -35,8 +35,7 @@ class TaskRepository
 
         $searchQuery = request()->input('search');
 
-        $filteredTasks = $this->task::where('user_id', auth()->id())
-            ->where(function ($query) use ($searchQuery) {
+        $filteredTasks = $this->task::where(function ($query) use ($searchQuery) {
                 $query->orWhere('title', 'LIKE', "%$searchQuery%")
                     ->orWhere('description', 'LIKE', "%$searchQuery%")
                     ->orWhere('due_date', 'LIKE', "%$searchQuery%");

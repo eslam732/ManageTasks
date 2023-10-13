@@ -34,11 +34,6 @@ Route::group(['middleware' => ['session.auth']], function () {
         return view('addTask');
     })->name('addTaskView');
 
-    // Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
-
-    //  Route::post('addTask', [TaskController::class, 'createTask'])->name('addTask');
-
-    // Route::delete('delete/{taskId}', [TaskController::class, 'deleteTask'])->name('deleteTask');
 
     Route::resource('tasks', TaskController::class);
 

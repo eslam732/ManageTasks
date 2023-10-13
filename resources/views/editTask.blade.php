@@ -48,8 +48,8 @@
                 <label for="status">Status:</label>
                 <select class="form-control" id="status" name="status">
                     <option value="not_started">Not Started</option>
-                    <!-- <option value="in_progress">In Progress</option>
-                    <option value="finished">Finished</option> -->
+                    <option value="started">Started</option>
+                    <option value="finished">Finished</option>
                 </select>
             </div>
 
